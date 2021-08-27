@@ -1,6 +1,5 @@
 # user-management-service
 
-
 Simple HTTP server that manages user data.
 
 ## Functionalities
@@ -20,22 +19,31 @@ Simple HTTP server that manages user data.
 - [Air](https://github.com/cosmtrek/air): for live reloading of the service during local development.
 
 ## Run locally
-### (Option 1) __Air__
+
 ```sh
+# install dependencies
+go get ./...
+
+# build, test and run
+go build -v ./...
+go test -v ./...
+go run main.go
+
+## (optional) for live reloading
+
 # install air
-go get -u github.com/cosmtrek/air
+curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
 
 # run
 air
+
+# if error 'air: command not found', then add to PATH and run again
+export PATH=$PATH:$(go env GOPATH)/bin
 ```
 
-### (Option 2) Docker
-```sh
-```
+## cURL commands
 
-## Test
-### Usage
-### cURL commands
+
 
 ## TODO
 - [ ] integrate persistence layer with a physical database. 
@@ -44,8 +52,10 @@ air
 - [ ] add swagger generation for the api.
 - [ ] add correlation id for distributed tracing.
 - [ ] add structured logging.
+- [ ] add metrics.
+- [ ] enhance testing with coverage analysis.
 - [ ] authenticate calls, so that updating a user is only allowed the creator.
 - [ ] integrate with a configuration as a service to get secrets and other configs.
-- [ ] add performance tests.
+- [ ] run performance tests, pprof.
 - [ ] pentest the api.
 - [ ] use docker-compose or similar tool for running all associated components locally, like the database.
