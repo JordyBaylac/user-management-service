@@ -3,31 +3,30 @@ package users
 import (
 	"fmt"
 
-	"github.com/JordyBaylac/user-management-service/users/domain"
-	"github.com/JordyBaylac/user-management-service/users/storage"
+	"github.com/JordyBaylac/user-management-service/users/models"
 )
 
 type UserService interface {
-	GetByID(userID string) (*domain.User, error)
-	Create(email, name string) (*domain.User, error)
-	Update(userID, newName string) (*domain.User, error)
+	GetByID(userID string) (*models.User, error)
+	Create(email, name string) (*models.User, error)
+	Update(userID, newName string) (*models.User, error)
 }
 
 type DefaultUserService struct {
-	store storage.UserStorage
+	store UserStorage
 }
 
-func NewUserService(storage storage.UserStorage) *DefaultUserService {
+func NewUserService(storage UserStorage) *DefaultUserService {
 	return &DefaultUserService{storage}
 }
 
-func (service *DefaultUserService) Create(email, name string) (*domain.User, error) {
+func (service *DefaultUserService) Create(email, name string) (*models.User, error) {
 	store := service.store
 	if exists := store.ExistByEmail(email); exists {
 		return nil, fmt.Errorf("user with email %s is already present", email)
 	}
 
-	var newUser *domain.User
+	var newUser *models.User
 	var err error
 
 	if newUser, err = store.CreateUser(email, name); err != nil {
@@ -37,9 +36,9 @@ func (service *DefaultUserService) Create(email, name string) (*domain.User, err
 	return newUser, nil
 }
 
-func (service *DefaultUserService) GetByID(userID string) (*domain.User, error) {
+func (service *DefaultUserService) GetByID(userID string) (*models.User, error) {
 	store := service.store
-	var user *domain.User
+	var user *models.User
 
 	if user = store.GetByID(userID); user == nil {
 		return nil, fmt.Errorf("user with id %s do not exist", userID)
@@ -48,8 +47,8 @@ func (service *DefaultUserService) GetByID(userID string) (*domain.User, error) 
 	return user, nil
 }
 
-func (service *DefaultUserService) Update(userID, newName string) (*domain.User, error) {
-	var existingUser *domain.User
+func (service *DefaultUserService) Update(userID, newName string) (*models.User, error) {
+	var existingUser *models.User
 	var err error
 	if existingUser, err = service.GetByID(userID); err != nil {
 		return nil, fmt.Errorf("user with id %s do not exist", userID)

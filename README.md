@@ -8,7 +8,7 @@ Simple HTTP server that manages user data.
 3. __Update user data__. Given a system assigned user ID, it will allow to change user attributes.
 
 ## Architecture
-<!-- TODO: diagram -->
+![Architecture](architecture.png)
 
 ### Project layout
 - _api/_ package is the interface of this service. It's where the http server is configured (routes, middlewares, etc)
@@ -43,19 +43,43 @@ export PATH=$PATH:$(go env GOPATH)/bin
 
 ## cURL commands
 
+### Create new user
+```sh
+curl --request POST \
+  --url http://localhost:8080/users \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"name": "Neymar",
+	"email": "player@soccer.com"
+}'
+```
 
+### Get user data
+```sh
+curl --request GET \
+  --url http://localhost:8080/users/:userID
+```
+
+### Update user data
+```sh
+curl --request PATCH \
+  --url http://localhost:8080/users/:userID \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"name": "Neymar da Silva Santos Junior"
+}'
+```
 
 ## TODO
-- [ ] integrate persistence layer with a physical database. 
-- [ ] refactor project layout to a more conventional one.
+- [ ] pentest the api.
+- [ ] implement persistence storage with a real database. 
 - [ ] implement a custom error handler.
 - [ ] add swagger generation for the api.
 - [ ] add correlation id for distributed tracing.
 - [ ] add structured logging.
 - [ ] add metrics.
 - [ ] enhance testing with coverage analysis.
-- [ ] authenticate calls, so that updating a user is only allowed the creator.
-- [ ] integrate with a configuration as a service to get secrets and other configs.
-- [ ] run performance tests, pprof.
-- [ ] pentest the api.
-- [ ] use docker-compose or similar tool for running all associated components locally, like the database.
+- [ ] refactor project layout to a more conventional one.
+- [ ] authenticate calls, so that updating a user is only allowed to the creator.
+- [ ] integrate with a configuration as a service to get secrets and other configs per environment.
+- [ ] run performance tests, pprof and check race conditions.

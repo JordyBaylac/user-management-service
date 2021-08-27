@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/JordyBaylac/user-management-service/users"
-	"github.com/JordyBaylac/user-management-service/users/domain"
+	"github.com/JordyBaylac/user-management-service/users/models"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -21,7 +21,7 @@ func HandleGetUser(service users.UserService) func(c *fiber.Ctx) error {
 		}
 
 		// call business service
-		var result *domain.User
+		var result *models.User
 		var err error
 		if result, err = service.GetByID(userID); err != nil {
 			return c.Status(fiber.StatusConflict).SendString(err.Error())

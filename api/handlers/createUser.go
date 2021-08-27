@@ -3,7 +3,7 @@ package handlers
 import (
 	"github.com/JordyBaylac/user-management-service/api/validations"
 	"github.com/JordyBaylac/user-management-service/users"
-	"github.com/JordyBaylac/user-management-service/users/domain"
+	"github.com/JordyBaylac/user-management-service/users/models"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -33,7 +33,7 @@ func HandleCreateUser(service users.UserService) func(c *fiber.Ctx) error {
 		}
 
 		// call business service
-		var result *domain.User
+		var result *models.User
 		var err error
 		if result, err = service.Create(req.Email, req.Name); err != nil {
 			return c.Status(fiber.StatusConflict).SendString(err.Error())
