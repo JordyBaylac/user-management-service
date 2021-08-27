@@ -27,6 +27,11 @@ func HandleUpdateUser(service users.UserService) func(c *fiber.Ctx) error {
 			return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 		}
 
+		errors := ValidateStruct(req)
+		if errors != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(errors)
+		}
+
 		var result *users.User
 		var err error
 		if result, err = service.Update(userID, req.Name); err != nil {

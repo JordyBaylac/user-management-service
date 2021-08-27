@@ -6,7 +6,7 @@ import (
 )
 
 type CreateUserRequest struct {
-	Email string `json:"email" xml:"email,attr"`
+	Email string `json:"email" xml:"email,attr" validate:"required,email"`
 	Name  string `json:"name" xml:"name,attr"`
 }
 
@@ -21,6 +21,11 @@ func HandleCreateUser(service users.UserService) func(c *fiber.Ctx) error {
 		req := new(CreateUserRequest)
 		if err := c.BodyParser(req); err != nil {
 			return c.Status(fiber.StatusBadRequest).SendString(err.Error())
+		}
+
+		errors := ValidateStruct(req)
+		if errors != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(errors)
 		}
 
 		var result *users.User

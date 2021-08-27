@@ -40,6 +40,7 @@ air
 ## TODO
 - [ ] integrate persistence layer with a physical database. 
 - [ ] refactor project layout to a more conventional one.
+- [ ] implement a custom error handler.
 - [ ] add swagger generation for the api.
 - [ ] add correlation id for distributed tracing.
 - [ ] add structured logging.
@@ -47,3 +48,4 @@ air
 - [ ] integrate with a configuration as a service to get secrets and other configs.
 - [ ] add performance tests.
 - [ ] pentest the api.
+- [ ] use docker-compose or similar tool for running all associated components locally, like the database.

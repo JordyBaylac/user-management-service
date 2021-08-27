@@ -7,6 +7,7 @@ require (
 	github.com/creack/pty v1.1.15 // indirect
 	github.com/fatih/color v1.12.0 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
+	github.com/go-playground/validator/v10 v10.9.0 // indirect
 	github.com/gofiber/fiber/v2 v2.18.0 // indirect
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/pelletier/go-toml v1.9.3 // indirect
