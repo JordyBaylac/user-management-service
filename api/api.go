@@ -1,8 +1,16 @@
 package api
 
-import "errors"
+import (
+	"github.com/gofiber/fiber/v2"
+)
+
+const defaultPort = 8080
 
 func Start() error {
+	app := fiber.New()
 
-	return errors.New("api not implemented")
+	// routes
+	setupRoutes(app, nil)
+
+	return app.Listen(getServerAddress())
 }

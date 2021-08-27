@@ -17,9 +17,10 @@ Simple HTTP server that manages user data.
 
 ### Dependencies
 - [Fiber](https://gofiber.io/): web framework used, an express like for Go.
+- [Air](https://github.com/cosmtrek/air): for live reloading of the service during local development.
 
 ## Run locally
-### (Option 1) Using __air__ for hot reloading
+### (Option 1) __Air__
 ```sh
 # install air
 go get -u github.com/cosmtrek/air
@@ -28,7 +29,7 @@ go get -u github.com/cosmtrek/air
 air
 ```
 
-### (Option 2) Dockerize the service
+### (Option 2) Docker
 ```sh
 ```
 
