@@ -2,19 +2,19 @@ package handlers
 
 import "github.com/go-playground/validator/v10"
 
-type ErrorResponse struct {
+type ValidationError struct {
 	FailedField string
 	Constraint  string
 }
 
-func ValidateStruct(object interface{}) []*ErrorResponse {
-	var errors []*ErrorResponse
+func ValidateStruct(object interface{}) []*ValidationError {
+	var errors []*ValidationError
 	validate := validator.New()
 	err := validate.Struct(object)
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
-			element := ErrorResponse{
-				FailedField: err.StructNamespace(),
+			element := ValidationError{
+				FailedField: err.StructField(),
 				Constraint:  err.Tag(),
 			}
 			errors = append(errors, &element)

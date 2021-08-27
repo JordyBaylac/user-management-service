@@ -16,8 +16,8 @@ type InMemoryUserService struct {
 	emails map[string]bool
 }
 
-func CreateInMemoryUserService() InMemoryUserService {
-	return InMemoryUserService{
+func CreateInMemoryUserService() *InMemoryUserService {
+	return &InMemoryUserService{
 		users:  make(map[string]*User),
 		emails: make(map[string]bool),
 	}
@@ -43,7 +43,7 @@ func (service *InMemoryUserService) Create(email string, name string) (*User, er
 
 func (service *InMemoryUserService) GetByID(userID string) (*User, error) {
 	if _, found := service.users[userID]; !found {
-		return nil, fmt.Errorf("user with id %s is not present", userID)
+		return nil, fmt.Errorf("user with id %s do not exist", userID)
 	}
 
 	return service.users[userID], nil
@@ -51,7 +51,7 @@ func (service *InMemoryUserService) GetByID(userID string) (*User, error) {
 
 func (service *InMemoryUserService) Update(userID string, newName string) (*User, error) {
 	if _, found := service.users[userID]; !found {
-		return nil, fmt.Errorf("user with id %s is not present", userID)
+		return nil, fmt.Errorf("user with id %s do not exist", userID)
 	}
 
 	existingUser := service.users[userID]

@@ -18,8 +18,8 @@ type UpdateUserResponse struct {
 func HandleUpdateUser(service users.UserService) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
 		var userID string
-		if userID = c.Params("id"); userID == "" {
-			return c.Status(fiber.StatusBadRequest).SendString("id param not found")
+		if userID = c.Params("userID"); userID == "" {
+			return c.Status(fiber.StatusBadRequest).SendString("userID param not found")
 		}
 
 		req := new(UpdateUserRequest)

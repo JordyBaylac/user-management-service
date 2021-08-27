@@ -1,6 +1,7 @@
 package api
 
 import (
+	"github.com/JordyBaylac/user-management-service/users"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 )
@@ -13,6 +14,6 @@ func Start() error {
 	// recover from panics
 	app.Use(recover.New())
 
-	setupRoutes(app, nil)
+	setupRoutes(app, users.CreateInMemoryUserService())
 	return app.Listen(getServerAddress())
 }
