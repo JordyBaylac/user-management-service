@@ -35,6 +35,7 @@ func TestCreateUser(t *testing.T) {
 		{
 			scenario:     "valid request should return newly created user",
 			requestBody:  handlers.CreateUserRequest{Email: "messi@gmail.com", Name: "Messi"},
+			expectedBody: &handlers.CreateUserResponse{Email: "messi@gmail.com", Name: "Messi"},
 			expectedCode: http.StatusOK,
 		},
 		{
@@ -75,7 +76,7 @@ func TestCreateUser(t *testing.T) {
 		assert.Nilf(t, err, test.scenario, "Body must be a valid JSON")
 
 		assert.Equalf(t, test.expectedBody.Email, response.Email, test.scenario, "Email must match")
-		assert.Equalf(t, test.expectedBody.Name, response.Email, test.scenario, "Name must match")
+		assert.Equalf(t, test.expectedBody.Name, response.Name, test.scenario, "Name must match")
 		assert.NotEmpty(t, response.ID, test.scenario, "ID must have a value")
 	}
 }
