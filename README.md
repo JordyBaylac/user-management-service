@@ -11,12 +11,12 @@ Simple HTTP server that manages user data.
 ## Architecture
 <!-- TODO: diagram -->
 
-### Folder structure
+### Project layout
 - _api/_ package is the interface of this service. It's where the http server is configured (routes, middlewares, etc)
 - _user/_ it is a domain specific package that contains business regarding the management of users.
 
 ### Dependencies
-- [https://gofiber.io/](https://gofiber.io/): web framework used, an express like for Go.
+- [Fiber](https://gofiber.io/): web framework used, an express like for Go.
 
 ## Run locally
 ### (Option 1) Using __air__ for hot reloading
@@ -35,3 +35,14 @@ air
 ## Test
 ### Usage
 ### cURL commands
+
+## TODO
+- [ ] integrate persistence layer with a physical database. 
+- [ ] refactor project layout to a more conventional one.
+- [ ] add swagger generation for the api.
+- [ ] add correlation id for distributed tracing.
+- [ ] add structured logging.
+- [ ] authenticate calls, so that updating a user is only allowed the creator.
+- [ ] integrate with a configuration as a service to get secrets and other configs.
+- [ ] add performance tests.
+- [ ] pentest the api.
