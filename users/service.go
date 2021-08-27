@@ -1,60 +1,61 @@
 package users
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/JordyBaylac/user-management-service/users/domain"
+	"github.com/JordyBaylac/user-management-service/users/storage"
+)
 
 type UserService interface {
-	Create(email string, name string) (*User, error)
-	GetByID(userID string) (*User, error)
-	Update(userID string, newName string) (*User, error)
+	GetByID(userID string) (*domain.User, error)
+	Create(email, name string) (*domain.User, error)
+	Update(userID, newName string) (*domain.User, error)
 }
 
-type InMemoryUserService struct {
-	// memory storage for storing users by ID
-	users map[string]*User
-
-	// set to identify existing emails
-	emails map[string]bool
+type DefaultUserService struct {
+	store storage.UserStorage
 }
 
-func CreateInMemoryUserService() *InMemoryUserService {
-	return &InMemoryUserService{
-		users:  make(map[string]*User),
-		emails: make(map[string]bool),
-	}
+func NewUserService(storage storage.UserStorage) *DefaultUserService {
+	return &DefaultUserService{storage}
 }
 
-func (service *InMemoryUserService) Create(email string, name string) (*User, error) {
-	if exists := service.emails[email]; exists {
+func (service *DefaultUserService) Create(email, name string) (*domain.User, error) {
+	store := service.store
+	if exists := store.ExistByEmail(email); exists {
 		return nil, fmt.Errorf("user with email %s is already present", email)
 	}
 
-	uniqueID := generateUniqueID()
-	user := User{
-		ID:    uniqueID,
-		Email: email,
-		Name:  name,
+	var newUser *domain.User
+	var err error
+
+	if newUser, err = store.CreateUser(email, name); err != nil {
+		return nil, err
 	}
 
-	service.emails[email] = true
-	service.users[uniqueID] = &user
-
-	return &user, nil
+	return newUser, nil
 }
 
-func (service *InMemoryUserService) GetByID(userID string) (*User, error) {
-	if _, found := service.users[userID]; !found {
+func (service *DefaultUserService) GetByID(userID string) (*domain.User, error) {
+	store := service.store
+	var user *domain.User
+
+	if user = store.GetByID(userID); user == nil {
 		return nil, fmt.Errorf("user with id %s do not exist", userID)
 	}
 
-	return service.users[userID], nil
+	return user, nil
 }
 
-func (service *InMemoryUserService) Update(userID string, newName string) (*User, error) {
-	if _, found := service.users[userID]; !found {
+func (service *DefaultUserService) Update(userID, newName string) (*domain.User, error) {
+	var existingUser *domain.User
+	var err error
+	if existingUser, err = service.GetByID(userID); err != nil {
 		return nil, fmt.Errorf("user with id %s do not exist", userID)
 	}
 
-	existingUser := service.users[userID]
+	// update name only
 	existingUser.Name = newName
 
 	return existingUser, nil
