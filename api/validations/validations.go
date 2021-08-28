@@ -3,8 +3,8 @@ package validations
 import "github.com/go-playground/validator/v10"
 
 type ValidationError struct {
-	FailedField string
-	Constraint  string
+	FailedField string `json:"failedField" xml:"failedField"`
+	Constraint  string `json:"constraint" xml:"constraint"`
 }
 
 func ValidateStruct(object interface{}) []*ValidationError {
