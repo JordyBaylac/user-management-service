@@ -27,16 +27,7 @@ jobs:
     - name: Coverage report
       id: coverage
       run: |
-        go install github.com/ory/go-acc/cmd
+        go get -u github.com/ory/go-acc
         echo "COVERAGE=$(go-acc ./... | grep "coverage: " | awk -F"coverage: " '{sub(/ .*/,"",$2);print $2}')"
         echo "##[set-output name=coveragelines;]${COVERAGE}%"
-
-    - name: Generate the coverage badge
-      uses: emibcn/badge-action@v1
-      id: badge
-      with:
-        label: 'Coverage'
-        status: ${{ steps.coverage.outputs.coverage }}
-        path: ./coverage.svg
-        color: ${{ steps.coverage.outputs.coveragelines > 75 && 'green' || 'red' }}
 
