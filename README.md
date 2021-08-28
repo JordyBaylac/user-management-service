@@ -85,8 +85,8 @@ curl --request PATCH \
 - [ ] add correlation id for distributed tracing.
 - [ ] add structured logging.
 - [ ] add metrics.
-- [ ] enhance testing with coverage analysis.
 - [ ] refactor project layout to a more conventional one.
 - [ ] authenticate calls, so that updating a user is only allowed to the creator.
 - [ ] integrate with a configuration as a service to get secrets and other configs per environment.
 - [ ] run performance tests, pprof and check race conditions.
+- [ ] secure api with rate limiting.
