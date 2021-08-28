@@ -80,6 +80,7 @@ curl --request PATCH \
 - [ ] pentest the api.
 - [ ] implement persistence storage with a real database. 
 - [ ] implement a custom error handler.
+- [ ] improve error response model and add codes to business errros.
 - [ ] add swagger generation for the api.
 - [ ] add correlation id for distributed tracing.
 - [ ] add structured logging.
