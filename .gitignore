@@ -18,3 +18,6 @@ tmp/
 
 __debug_bin
 .idea/
+
+coverage.txt
+coverage
