@@ -17,7 +17,7 @@ Simple HTTP server that manages user data.
 - [validator](https://github.com/go-playground/validator): for validating using struct tags.
 
 ## Architecture
-This solution embraces decoupling and extensibility through inversion of control. There is a lot of room for improvement, but I think this architecture is easy to maintain, change and evolve with new requirements.
+This solution embraces decoupling and extensibility through inversion of control. There is a lot of room for improvement, but I think this architecture is easy to maintain, change and evolve with new requirements. 
 
 ### Project layout
 - _api/_ package is the interface of this service. It's where the http server is configured (routes, middlewares, etc)
@@ -56,7 +56,7 @@ export PATH=$PATH:$(go env GOPATH)/bin
 #### Create new user
 ```sh
 curl --request POST \
-  --url http://localhost:8080/users \
+  --url https://jbaylac-user-management-svc.herokuapp.com/users \
   --header 'Content-Type: application/json' \
   --data '{
 	"name": "Neymar",
@@ -66,13 +66,13 @@ curl --request POST \
 
 #### Get user data
 ```sh
-curl --request GET --url http://localhost:8080/users/:userID
+curl --request GET --url https://jbaylac-user-management-svc.herokuapp.com/users/:userID
 ```
 
 #### Update user data
 ```sh
 curl --request PATCH \
-  --url http://localhost:8080/users/:userID \
+  --url https://jbaylac-user-management-svc.herokuapp.com/users/:userID \
   --header 'Content-Type: application/json' \
   --data '{
 	"name": "Neymar da Silva Santos Junior"
