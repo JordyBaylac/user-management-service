@@ -27,7 +27,7 @@ jobs:
     - name: Coverage report
       id: coverage
       run: |
-        go get -u github.com/ory/go-acc
+        go install github.com/ory/go-acc
         echo "COVERAGE=$(go-acc ./... | grep "coverage: " | awk -F"coverage: " '{sub(/ .*/,"",$2);print $2}')"
         echo "##[set-output name=coveragelines;]${COVERAGE}%"
 
