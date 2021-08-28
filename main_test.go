@@ -237,7 +237,7 @@ func TestUpdateUser(t *testing.T) {
 		err = json.Unmarshal(body, &response)
 		assert.Nilf(t, err, test.scenario, "Body must be a valid JSON")
 
-		assert.Equalf(t, test.expectedBody.ID, "invalid", test.scenario, "ID must match")
+		assert.Equalf(t, test.expectedBody.ID, response.ID, test.scenario, "ID must match")
 		assert.Equalf(t, test.expectedBody.Email, response.Email, test.scenario, "Email must match")
 		assert.Equalf(t, test.expectedBody.Name, response.Name, test.scenario, "Name must match")
 	}
