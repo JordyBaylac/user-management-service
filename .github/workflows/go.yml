@@ -23,3 +23,19 @@ jobs:
 
     - name: Test
       run: go test -v
+    
+    - name: Coverage report
+      id: coverage
+      run: |
+        echo "COVERAGE=$(go-acc ./... | grep "coverage: " | awk -F"coverage: " '{sub(/ .*/,"",$2);print $2}')"
+        echo "##[set-output name=coveragelines;]${COVERAGE}%"
+
+    - name: Generate the coverage badge
+      uses: emibcn/badge-action@v1
+      id: badge
+      with:
+        label: 'Coverage'
+        status: ${{ steps.coverage.outputs.coverage }}
+        path: ./badges/test-coverage.svg
+        color: ${{ steps.coverage.outputs.coveragelines > 75 && 'green' || 'red' }}
+
