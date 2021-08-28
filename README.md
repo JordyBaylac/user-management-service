@@ -9,21 +9,22 @@ Simple HTTP server that manages user data.
 2. __Get user data__. Given a system assigned user ID, it will returns saved user data.
 3. __Update user data__. Given a system assigned user ID, it will allow to change user attributes.
 
-## Architecture
-I have put best effort into trying to apply best practices regarding code organization. This solution embraces decoupling and extensibility thorough inversion of control. There is a lot of room for improvement, but I think this architecture will make it easier to change and evolve with new requirements.
+## Dependencies
+- [Fiber](https://gofiber.io/): web framework used, an express like for Go.
+- [Air](https://github.com/cosmtrek/air): for live reloading of the service during local development.
 
-![Architecture](architecture.png)
+## Architecture
+This solution embraces decoupling and extensibility through inversion of control. There is a lot of room for improvement, but I think this architecture is easy to maintain, change and evolve with new requirements.
 
 ### Project layout
 - _api/_ package is the interface of this service. It's where the http server is configured (routes, middlewares, etc)
 - _user/_ it is a domain specific package that contains business regarding the management of users.
 
-### Dependencies
-- [Fiber](https://gofiber.io/): web framework used, an express like for Go.
-- [Air](https://github.com/cosmtrek/air): for live reloading of the service during local development.
+### Diagram
+![Architecture Diagram](architecture.png)
 
-## Run locally
-
+## Usage
+### Run locally
 ```sh
 # install dependencies
 go get ./...
@@ -45,9 +46,8 @@ air
 export PATH=$PATH:$(go env GOPATH)/bin
 ```
 
-## cURL commands
-
-### Create new user
+### cURL commands
+#### Create new user
 ```sh
 curl --request POST \
   --url http://localhost:8080/users \
@@ -58,13 +58,13 @@ curl --request POST \
 }'
 ```
 
-### Get user data
+#### Get user data
 ```sh
 curl --request GET \
   --url http://localhost:8080/users/:userID
 ```
 
-### Update user data
+#### Update user data
 ```sh
 curl --request PATCH \
   --url http://localhost:8080/users/:userID \
