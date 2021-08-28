@@ -12,7 +12,7 @@ import (
 const defaultPort = 8080
 
 func main() {
-	app := api.Setup()
+	app := api.Setup(nil)
 	address := getServerAddress()
 
 	log.Fatal(app.Listen(address))

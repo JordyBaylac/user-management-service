@@ -8,16 +8,21 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
-func Setup() *fiber.App {
+func Setup(idGenerator utils.UniqueIDGenerator) *fiber.App {
 	app := fiber.New()
 
 	// recover from panics
 	app.Use(recover.New())
 
 	// setup routes and dependency injection
+	generator := idGenerator
+	if idGenerator == nil {
+		generator = utils.NewUUIDGenerator()
+	}
+
 	setupRoutes(app,
 		users.NewUserService(
-			storage.NewInMemoryStorage(utils.NewUUIDGenerator()),
+			storage.NewInMemoryStorage(generator),
 		),
 	)
 

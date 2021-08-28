@@ -8,6 +8,8 @@ Simple HTTP server that manages user data.
 3. __Update user data__. Given a system assigned user ID, it will allow to change user attributes.
 
 ## Architecture
+I have put best effort into trying to apply best practices regarding code organization. This solution embraces decoupling and extensibility thorough inversion of control. There is a lot of room for improvement, but I think this architecture will make it easier to change and evolve with new requirements.
+
 ![Architecture](architecture.png)
 
 ### Project layout

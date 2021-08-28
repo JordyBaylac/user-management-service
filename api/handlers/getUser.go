@@ -33,7 +33,7 @@ func HandleGetUser(service users.UserService) func(c *fiber.Ctx) error {
 			Email: result.Email,
 			Name:  result.Name,
 		}
-		if err := c.Status(fiber.StatusCreated).JSON(response); err != nil {
+		if err := c.Status(fiber.StatusOK).JSON(response); err != nil {
 			return c.Status(fiber.StatusInternalServerError).SendString(err.Error())
 		}
 
