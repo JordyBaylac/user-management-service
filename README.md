@@ -29,6 +29,9 @@ This solution embraces decoupling and extensibility through inversion of control
 ## Usage
 ### Run locally
 ```sh
+# clone repo
+git clone https://github.com/JordyBaylac/user-management-service.git -b main
+
 # install dependencies
 go get ./...
 
