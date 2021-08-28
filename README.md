@@ -12,6 +12,9 @@ Simple HTTP server that manages user data.
 ## Dependencies
 - [Fiber](https://gofiber.io/): web framework used, an express like for Go.
 - [Air](https://github.com/cosmtrek/air): for live reloading of the service during local development.
+- [Testify](https://github.com/stretchr/testify): assertion library used.
+- [go.uuid](https://github.com/satori/go.uuid): for unique id generation.
+- [validator](https://github.com/go-playground/validator): for validating using struct tags.
 
 ## Architecture
 This solution embraces decoupling and extensibility through inversion of control. There is a lot of room for improvement, but I think this architecture is easy to maintain, change and evolve with new requirements.
