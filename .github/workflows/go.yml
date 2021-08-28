@@ -27,7 +27,7 @@ jobs:
     - name: Coverage report
       id: coverage
       run: |
-        go install github.com/ory/go-acc
+        go install github.com/ory/go-acc/cmd
         echo "COVERAGE=$(go-acc ./... | grep "coverage: " | awk -F"coverage: " '{sub(/ .*/,"",$2);print $2}')"
         echo "##[set-output name=coveragelines;]${COVERAGE}%"
 
@@ -37,6 +37,6 @@ jobs:
       with:
         label: 'Coverage'
         status: ${{ steps.coverage.outputs.coverage }}
-        path: ./badges/test-coverage.svg
+        path: ./coverage.svg
         color: ${{ steps.coverage.outputs.coveragelines > 75 && 'green' || 'red' }}
 
