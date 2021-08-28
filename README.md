@@ -1,5 +1,7 @@
 # user-management-service
 
+![Build](https://github.com/JordyBaylac/user-management-service/actions/workflows/go.yml/badge.svg?branch=main)
+
 Simple HTTP server that manages user data.
 
 ## Functionalities
