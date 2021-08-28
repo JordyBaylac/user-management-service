@@ -63,8 +63,7 @@ curl --request POST \
 
 #### Get user data
 ```sh
-curl --request GET \
-  --url http://localhost:8080/users/:userID
+curl --request GET --url http://localhost:8080/users/:userID
 ```
 
 #### Update user data
