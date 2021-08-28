@@ -37,6 +37,9 @@ go build -v ./...
 go test -v
 go run main.go
 
+# make sure api is working
+curl --request GET --url http://localhost:8080/health
+
 ## (optional) for live reloading
 
 # install air

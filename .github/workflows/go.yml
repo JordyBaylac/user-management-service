@@ -30,4 +30,18 @@ jobs:
         go get -u github.com/ory/go-acc
         echo "COVERAGE=$(go-acc ./... | grep "coverage: " | awk -F"coverage: " '{sub(/ .*/,"",$2);print $2}')"
         echo "##[set-output name=coveragelines;]${COVERAGE}%"
+  
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "jbaylac-user-management-svc" 
+          heroku_email: "jbaylacc@gmail.com"
+          healthcheck: "https://jbaylac-user-management-svc.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
+          rollbackonhealthcheckfailed: true
 

@@ -27,5 +27,5 @@ func getServerAddress() string {
 		port = number
 	}
 
-	return fmt.Sprintf("0.0.0.0:%d", port)
+	return fmt.Sprintf(":%d", port)
 }

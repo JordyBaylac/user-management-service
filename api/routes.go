@@ -11,6 +11,8 @@ func setupRoutes(
 	app *fiber.App,
 	userService users.UserService,
 ) {
+	app.Get("/health", handlers.HandleHealthCheck())
+
 	users := app.Group("/users")
 	users.Post("/", handlers.HandleCreateUser(userService))
 	users.Get("/:userID", handlers.HandleGetUser(userService))
