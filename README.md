@@ -93,4 +93,3 @@ curl --request PATCH \
 - [ ] authenticate calls, so that updating a user is only allowed to the creator.
 - [ ] integrate with a configuration as a service to get secrets and other configs per environment.
 - [ ] run performance tests, pprof and check race conditions.
-- [ ] secure api with rate limiting.
