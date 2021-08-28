@@ -5,9 +5,9 @@
 Simple HTTP server that manages user data. XML and JSON payload types are both accepted.
 
 ## Functionalities
-1. __Create new user__. Given user email and name, it will return a created user with a unique system assigned user ID.
+1. __Create new user__. Given user email and name, it will return a created user with a unique system assigned user ID. Additionally, I added the constraint that emails are unique.
 2. __Get user data__. Given a system assigned user ID, it will returns saved user data.
-3. __Update user data__. Given a system assigned user ID, it will allow to change user attributes.
+3. __Update user data__. Given a system assigned user ID, it will allow to change user name.
 
 ## Dependencies
 - [Fiber](https://gofiber.io/): web framework used, an express like for Go.
