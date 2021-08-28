@@ -2,7 +2,7 @@
 
 ![Build](https://github.com/JordyBaylac/user-management-service/actions/workflows/go.yml/badge.svg?branch=main)
 
-Simple HTTP server that manages user data.
+Simple HTTP server that manages user data. XML and JSON payload types are both accepted.
 
 ## Functionalities
 1. __Create new user__. Given user email and name, it will return a created user with a unique system assigned user ID.
@@ -57,11 +57,12 @@ export PATH=$PATH:$(go env GOPATH)/bin
 ```sh
 curl --request POST \
   --url https://jbaylac-user-management-svc.herokuapp.com/users \
-  --header 'Content-Type: application/json' \
-  --data '{
-	"name": "Neymar",
-	"email": "player@soccer.com"
-}'
+  --header 'Content-Type: application/xml' \
+  --data '<?xml version="1.0" encoding="UTF-8"?>
+<user>
+  <name>Neymar</name>
+  <email>player@soccer.com</email>
+</user>'
 ```
 
 #### Get user data

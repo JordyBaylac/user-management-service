@@ -2,6 +2,7 @@ package users
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/JordyBaylac/user-management-service/users/models"
 )
@@ -22,14 +23,16 @@ func NewUserService(storage UserStorage) *DefaultUserService {
 
 func (service *DefaultUserService) Create(email, name string) (*models.User, error) {
 	store := service.store
-	if exists := store.ExistByEmail(email); exists {
+
+	formattedEmail := strings.ToLower(strings.TrimSpace(email))
+	if exists := store.ExistByEmail(formattedEmail); exists {
 		return nil, fmt.Errorf("user with email %s is already present", email)
 	}
 
 	var newUser *models.User
 	var err error
 
-	if newUser, err = store.CreateUser(email, name); err != nil {
+	if newUser, err = store.CreateUser(formattedEmail, name); err != nil {
 		return nil, err
 	}
 
